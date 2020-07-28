@@ -5,9 +5,9 @@ import EditableMap from './EditableMap';
 const GameConsole = () => {
     const blankMap = () => {
         const startMap = []
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 50; i++) {
             startMap[i] = []
-            for (let j = 0; j < 35; j++) {
+            for (let j = 0; j < 50; j++) {
                 startMap[i][j] = false;
             }
         }

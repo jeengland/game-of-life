@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 const RunningMap = ({cellMap, setCellMap}) => {
     useEffect(() => {
-        const interval = setInterval(() => {
+        const interval = setTimeout(() => {
             const maxI = cellMap.length - 1
             const maxJ = cellMap[0].length - 1
             const newCellMap = cellMap.map((row, i) => {
@@ -56,7 +56,7 @@ const RunningMap = ({cellMap, setCellMap}) => {
             })
             setCellMap(newCellMap)
         }, 100);
-        return () => clearInterval(interval)
+        return () => clearTimeout(interval)
     }, [cellMap])
     return (
         <div className='map'>
