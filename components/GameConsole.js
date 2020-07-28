@@ -2,17 +2,20 @@ import React, { useState, useEffect } from 'react';
 import RunningMap from './RunningMap';
 import EditableMap from './EditableMap';
 
-const startMap = []
-for (let i = 0; i < 35; i++) {
-    startMap[i] = []
-    for (let j = 0; j < 35; j++) {
-        startMap[i][j] = false;
-    }
-}
-
 const GameConsole = () => {
+    const blankMap = () => {
+        const startMap = []
+        for (let i = 0; i < 35; i++) {
+            startMap[i] = []
+            for (let j = 0; j < 35; j++) {
+                startMap[i][j] = false;
+            }
+        }
+        return startMap
+    }
+
     const [running, setRunning] = useState(false);
-    const [cellMap, setCellMap] = useState(startMap);
+    const [cellMap, setCellMap] = useState(blankMap());
     const [generation, setGeneration] = useState(0);
 
     useEffect(() => {
@@ -45,11 +48,11 @@ const GameConsole = () => {
                 }
             </button>
             {running ? undefined
-                     : <button onClick={() => {randomizeMap(startMap)}}>Randomize</button> 
+                     : <button onClick={() => {randomizeMap(blankMap())}}>Randomize</button> 
             }
             {running ? undefined
                      : <button onClick={() => {
-                                                setCellMap(startMap)
+                                                setCellMap(blankMap())
                                                 setGeneration(0)
                                               }}>
                         Clear
