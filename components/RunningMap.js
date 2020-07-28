@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 const RunningMap = ({cellMap, setCellMap}) => {
     useEffect(() => {
         const interval = setInterval(() => {
+            const maxI = cellMap.length - 1
+            const maxJ = cellMap[0].length - 1
             const newCellMap = cellMap.map((row, i) => {
                 return row.map((cell, j) => {
                     const neighbors = [[i, j + 1],
@@ -14,11 +16,25 @@ const RunningMap = ({cellMap, setCellMap}) => {
                                  [i - 1, j - 1],
                                  [i - 1, j]];
                     let liveNeighbors = 0;
+                    
                     neighbors.forEach((n) => {
-                        if(n[0] >= 0 && n[0] <= cellMap.length - 1 && n[1] >= 0 && n[1] <= row.length) {
-                            if (cellMap[n[0]][n[1]]) {
-                                liveNeighbors++
-                            }
+                        // if(n[0] >= 0 && n[0] <= maxI - 1 && n[1] >= 0 && n[1] <= maxJ - 1) {
+                        //     if (cellMap[n[0]][n[1]]) {
+                        //         liveNeighbors++
+                        //     }
+                        // }
+                        if (n[0] < 0) {
+                            n[0] = maxI
+                        } else if (n[0] > maxI) {
+                            n[0] = 0
+                        }
+                        if (n[1] < 0) {
+                            n[1] = maxJ
+                        } else if (n[1] > maxJ) {
+                            n[1] = 0
+                        }
+                        if (cellMap[n[0]][n[1]]) {
+                            liveNeighbors++
                         }
                     })
                     if (cell) {
@@ -39,7 +55,7 @@ const RunningMap = ({cellMap, setCellMap}) => {
                 })
             })
             setCellMap(newCellMap)
-        }, 1000);
+        }, 100);
         return () => clearInterval(interval)
     }, [cellMap])
     return (
@@ -51,16 +67,16 @@ const RunningMap = ({cellMap, setCellMap}) => {
                                 return(
                                     cell ? <div className='cell'  
                                                 key={`${i}, ${j}`}
-                                                style={{ width: '20px', 
-                                                         height: '20px', 
+                                                style={{ width: '10px', 
+                                                         height: '10px', 
                                                          border: '1px solid black',
                                                          backgroundColor: 'black'
                                                 }}>
                                            </div>
                                          : <div className='cell'
                                                 key={`${i}, ${j}`}
-                                                style={{ width: '20px', 
-                                                         height: '20px', 
+                                                style={{ width: '10px', 
+                                                         height: '10px', 
                                                          border: '1px solid black',
                                                 }}>
                                            </div>

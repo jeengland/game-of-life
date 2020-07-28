@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EditableMap = ({cellMap, setCellMap}) => {
+const EditableMap = ({cellMap, setCellMap, setGeneration}) => {
 
     const handleClick = (e) => {
         const column = event.target.getAttribute('data-column')
@@ -8,6 +8,7 @@ const EditableMap = ({cellMap, setCellMap}) => {
         let newCellMap = [...cellMap]
         newCellMap[column][row] = !newCellMap[column][row]
         setCellMap(newCellMap)
+        setGeneration(0)
     }
     return (
         <div className='map'>
@@ -21,8 +22,8 @@ const EditableMap = ({cellMap, setCellMap}) => {
                                                 data-column={i} 
                                                 onClick={handleClick}
                                                 key={`${i}, ${j}`} 
-                                                style={{ width: '20px', 
-                                                         height: '20px', 
+                                                style={{ width: '10px', 
+                                                         height: '10px', 
                                                          border: '1px solid black',
                                                          backgroundColor: 'black'
                                                 }}>
@@ -32,8 +33,8 @@ const EditableMap = ({cellMap, setCellMap}) => {
                                                 data-column={i}
                                                 onClick={handleClick}
                                                 key={`${i}, ${j}`} 
-                                                style={{ width: '20px', 
-                                                         height: '20px', 
+                                                style={{ width: '10px', 
+                                                         height: '10px', 
                                                          border: '1px solid black',
                                                 }}>
                                            </div>
