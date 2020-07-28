@@ -1,9 +1,9 @@
 import React from 'react';
-import EditableMap from './components/EditableMap.js'
+import GameConsole from './components/GameConsole.js';
 
 const App = () => {
     return (
-        <EditableMap />
+        <GameConsole />
     )
 }
 
