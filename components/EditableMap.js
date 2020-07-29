@@ -2,7 +2,7 @@ import React from 'react';
 
 const EditableMap = ({cellMap, setCellMap, setGeneration}) => {
 
-    const handleClick = (e) => {
+    const handleClick = () => {
         const column = event.target.getAttribute('data-column')
         const row = event.target.getAttribute('data-row')
         let newCellMap = [...cellMap]

@@ -3,11 +3,11 @@ import RunningMap from './RunningMap';
 import EditableMap from './EditableMap';
 
 const GameConsole = () => {
-    const blankMap = () => {
+    const blankMap = (size) => {
         const startMap = []
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < size; i++) {
             startMap[i] = []
-            for (let j = 0; j < 50; j++) {
+            for (let j = 0; j < size; j++) {
                 startMap[i][j] = false;
             }
         }
@@ -15,8 +15,10 @@ const GameConsole = () => {
     }
 
     const [running, setRunning] = useState(false);
-    const [cellMap, setCellMap] = useState(blankMap());
+    const [mapSize, setMapSize] = useState(60);
+    const [cellMap, setCellMap] = useState(blankMap(mapSize));
     const [generation, setGeneration] = useState(0);
+    const [speed, setSpeed] = useState(200)
 
     useEffect(() => {
         if (running) {
@@ -38,27 +40,53 @@ const GameConsole = () => {
         setCellMap(newCellMap)
         setGeneration(0)
     }
+
+    const handleSizeChange = () => {
+        const sizeInput = document.querySelector('.size')
+        if (sizeInput.value < 10) {
+            setMapSize(10)
+            sizeInput.value = 10
+        } else if (sizeInput.value > 100) {
+            setMapSize(100)
+            sizeInput.value = 100
+        } else {
+            setMapSize(sizeInput.value)
+        }
+    }
+
+    useEffect(() => {
+        setCellMap(blankMap(mapSize))
+    }, [mapSize])
+
+    const handleSpeedChange = () => {
+        setSpeed(event.target.value)
+    }
+
     return (
         <div className='console'>
-            {running ? <RunningMap cellMap={cellMap} setCellMap={setCellMap}/>
+            {running ? <RunningMap cellMap={cellMap} setCellMap={setCellMap} speed={speed}/>
                      : <EditableMap cellMap={cellMap} setCellMap={setCellMap} setGeneration={setGeneration}/>}
             <button onClick={() => setRunning(!running)}>
                 {running ? 'Stop'
                          : 'Start'    
                 }
             </button>
-            {running ? undefined
-                     : <button onClick={() => {randomizeMap(blankMap())}}>Randomize</button> 
-            }
-            {running ? undefined
-                     : <button onClick={() => {
-                                                setCellMap(blankMap())
+            <span>Generation: {generation}</span>
+            {
+                running ? undefined
+                        : <div className='options'>
+                            <button onClick={() => {randomizeMap(blankMap(mapSize))}}>Randomize</button>
+                            <button onClick={() => {
+                                                setCellMap(blankMap(mapSize))
                                                 setGeneration(0)
                                               }}>
-                        Clear
-                      </button>
+                                Clear
+                            </button>
+                            <input type='number' className='size' min='10' max='100' defaultValue={mapSize} onSubmit={handleSizeChange}/>
+                            <button onClick={handleSizeChange}>Set Size</button>
+                            <input type='range' min='50' max='2000' defaultValue={speed} onChange={handleSpeedChange}/>
+                          </div>
             }
-            <span>Generation: {generation}</span>
         </div>
     )
 }

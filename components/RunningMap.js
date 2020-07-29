@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const RunningMap = ({cellMap, setCellMap}) => {
+const RunningMap = ({cellMap, setCellMap, speed}) => {
     useEffect(() => {
         const interval = setTimeout(() => {
             const maxI = cellMap.length - 1
@@ -38,12 +38,12 @@ const RunningMap = ({cellMap, setCellMap}) => {
                         }
                     })
                     if (cell) {
-                        if (liveNeighbors < 2) {
-                            return false
-                        } else if (liveNeighbors > 3) {
-                            return false
-                        } else {
+                        if (liveNeighbors == 2) {
                             return true
+                        } else if (liveNeighbors == 3) {
+                            return true
+                        } else {
+                            return false
                         }
                     } else {
                         if (liveNeighbors == 3) {
@@ -55,7 +55,7 @@ const RunningMap = ({cellMap, setCellMap}) => {
                 })
             })
             setCellMap(newCellMap)
-        }, 100);
+        }, speed);
         return () => clearTimeout(interval)
     }, [cellMap])
     return (
