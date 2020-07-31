@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,KACI,QAAS,CACT,SAAU,CACV,wBACJ","file":"game-of-life.b93ac5a9.css","sourceRoot":"..","sourcesContent":["body {\r\n    margin: 0;\r\n    padding: 0;\r\n    background-color: lightskyblue;\r\n}"]}
