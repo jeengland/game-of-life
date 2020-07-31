@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EditableMap = ({cellMap, setCellMap, setGeneration}) => {
+const EditableMap = ({cellMap, cellSize, setCellMap, setGeneration}) => {
 
     const handleClick = () => {
         const column = event.target.getAttribute('data-column')
@@ -22,9 +22,10 @@ const EditableMap = ({cellMap, setCellMap, setGeneration}) => {
                                                 data-column={i} 
                                                 onClick={handleClick}
                                                 key={`${i}, ${j}`} 
-                                                style={{ width: '10px', 
-                                                         height: '10px', 
+                                                style={{ width: `${cellSize}px`, 
+                                                         height: `${cellSize}px`, 
                                                          border: '1px solid black',
+                                                         boxSizing: 'border-box',
                                                          backgroundColor: 'black'
                                                 }}>
                                            </div>
@@ -33,8 +34,9 @@ const EditableMap = ({cellMap, setCellMap, setGeneration}) => {
                                                 data-column={i}
                                                 onClick={handleClick}
                                                 key={`${i}, ${j}`} 
-                                                style={{ width: '10px', 
-                                                         height: '10px', 
+                                                style={{ width: `${cellSize}px`, 
+                                                         height: `${cellSize}px`,
+                                                         boxSizing: 'border-box', 
                                                          border: '1px solid black',
                                                 }}>
                                            </div>

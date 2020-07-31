@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const RunningMap = ({cellMap, setCellMap, speed}) => {
+const RunningMap = ({cellMap, cellSize, setCellMap, speed}) => {
     useEffect(() => {
         const interval = setTimeout(() => {
             const maxI = cellMap.length - 1
@@ -59,7 +59,7 @@ const RunningMap = ({cellMap, setCellMap, speed}) => {
         return () => clearTimeout(interval)
     }, [cellMap])
     return (
-        <div className='map'>
+        <div className='map' style={{ backgroundColor: 'white' }}>
             {cellMap.map((cellRow, i) => {
                 return <div key={i} className='row' style={{ display: 'flex', flexDirection: 'row'}}>
                         {
@@ -67,17 +67,19 @@ const RunningMap = ({cellMap, setCellMap, speed}) => {
                                 return(
                                     cell ? <div className='cell'  
                                                 key={`${i}, ${j}`}
-                                                style={{ width: '10px', 
-                                                         height: '10px', 
-                                                         border: '1px solid black',
+                                                style={{ width: `${cellSize}px`, 
+                                                         height: `${cellSize}px`, 
+                                                         border: '1px solid grey',
+                                                         boxSizing: 'border-box',
                                                          backgroundColor: 'black'
                                                 }}>
                                            </div>
                                          : <div className='cell'
                                                 key={`${i}, ${j}`}
-                                                style={{ width: '10px', 
-                                                         height: '10px', 
-                                                         border: '1px solid black',
+                                                style={{ width: `${cellSize}px`, 
+                                                         height: `${cellSize}px`,
+                                                         boxSizing: 'border-box', 
+                                                         border: '1px solid grey',
                                                 }}>
                                            </div>
                                 )
