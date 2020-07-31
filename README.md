@@ -2,5 +2,5 @@
 A website implementing Conway's Game of Life
 
 ## To Run
-*Run `npm i`
-*Run `npm start`
+* Run `npm i`
+* Run `npm start`
